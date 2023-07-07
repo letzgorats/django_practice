@@ -1,20 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 
 menu_dict = {
-    "whoAreU" : "Please enter Your name!",
-    "ranking" : "Here are rankings",
-    "aboutHint" : "Hint!"
-}
+    "who Are U" : "Please enter Your name!",
+    "Ranking" : "Here are rankings",
+    "about Hint" : "Hint!",
+}   
 
 
 # index
 def index(request):
 
     list_items = ""
-    subjects = list(menu_dict.keys())      
+    subjects = list(menu_dict.keys())   
+
+    return render(request,"whoMain/index.html",{
+        "subjects" : subjects
+    })   
 
     for sub in subjects:
         capitalized_sub = sub.capitalize()
@@ -60,9 +65,12 @@ def whoamIstr(request,subject):
 
     try:
         mainClickPage_text = menu_dict[subject]
-        respsonse_data = f"<h3>{mainClickPage_text}</h3>"
-
-        return HttpResponse(respsonse_data)
+        response_data = render(request, 'whoMain/menu_content.html',{
+            "text":mainClickPage_text,
+            "subject_name": subject.capitalize()
+        })
+        # response_data = render_to_string("whoMain/menu_content.html")
+        return HttpResponse(response_data)
     except:
         return HttpResponseNotFound("<h1>Error!</h1>")
 

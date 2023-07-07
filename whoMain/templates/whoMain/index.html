@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{%block page_title%}
+    <center> Guess Me! </center>
+{%endblock%}
+
+{%block content%}
+{% include "whoMain/includes/header.html" %}
+
+    <ul>
+        {% for subject in subjects %}
+            <li><a href="{% url "whoMain-guess" subject=subject %}">{{ subject | title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    {%endblock%}
+
+
+

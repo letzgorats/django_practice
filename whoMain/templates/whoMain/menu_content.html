@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <center> * {{ subject_name | title }} * </center>
+{% endblock %}    
+
+{% block content%}
+    
+    {% include "whoMain/includes/header.html" %}
+
+    <h1><center> * {{ subject_name | title }} * </center></h1>
+    {% if text is not None %}
+        <h2>{{ text }}</h2>
+    {% else%}
+        <p>No Access!</p>
+    {% endif %}
+{% endblock%}
+
+
+
