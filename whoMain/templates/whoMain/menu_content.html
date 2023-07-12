@@ -8,13 +8,48 @@
     
     {% include "whoMain/includes/header.html" %}
 
-    <h1><center> * {{ subject_name | title }} * </center></h1>
+    <h1><center id = 'center'> * {{ subject_name | title }} * </center></h1>
+    <script>
+        let center = document.getElementById('center')
+        let count = 0
+        setInterval(()=>{
+            let colorList = ['red','blue','violet']
+        
+            
+            center.style.color= colorList[count%3]
+            count ++
+
+        },500)
+    </script>
+    
     {% if text is not None %}
-        <h2>{{ text }}</h2>
+    <h2 id = "text"><center> {{ text }} </center></h2>
+    <script>
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+        }
+
+        let text = document.getElementById('text')
+        let countText = 0
+        
+        setInterval(()=>{
+        let colorList = ['green','#000000','violet']
+            
+        text.style.color= 'rgb(' + getRandomInt(0,256)+','+getRandomInt(0,256)+','+getRandomInt(0,256)+')'
+        {% comment %} text.style.color= colorList[countText%3] {% endcomment %}
+        countText ++
+    
+        },500)
+    </script>
     {% else%}
         <p>No Access!</p>
     {% endif %}
 {% endblock%}
+
+
 
 
 

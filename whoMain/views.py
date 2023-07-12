@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect,Http404
 from django.urls import reverse
 from django.template.loader import render_to_string
 
@@ -72,7 +72,9 @@ def whoamIstr(request,subject):
         # response_data = render_to_string("whoMain/menu_content.html")
         return HttpResponse(response_data)
     except:
-        return HttpResponseNotFound("<h1>Error!</h1>")
+        # response_data = render_to_string("404.html")
+        # return HttpResponseNotFound(response_data)
+        raise Http404()
 
 def whoamInumber(request,number):
 
